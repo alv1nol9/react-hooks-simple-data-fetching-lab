@@ -1,18 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from "react";
 
-const App = () => {
+function App() {
+  const [image, setImage] = useState(null);
 
-    const[image,setImage] =useState([])
-    useEffect(()=>{
-        fetch("https://dog.ceo/api/breeds/image/random")
-        .then(res => res.json())
-        .then(data => setImage(data.message) )
-    },[])
+  useEffect(() => {
+    fetch("https://dog.ceo/api/breeds/image/random")
+      .then((res) => res.json())
+      .then((data) => setImage(data.message));
+  }, []);
+
+
+  if (!image) {
+    return <p>Loading...</p>;
+  }
+
   return (
-    <>
-    <img src={image} alt='okayyy'></img>
-    </>
-  )
+    <div>
+      <img src={image} alt="A Random Dog" />
+    </div>
+  );
 }
 
-export default App
+export default App;
